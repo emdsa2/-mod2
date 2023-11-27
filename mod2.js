@@ -86,7 +86,7 @@
             触摸反馈(data, "Suction", 汪叭3);
             触摸反馈(data, "VibeMode", 汪叭4);
             触摸反馈(data, "Tickle", 汪叭5);
-        }
+        
         if (
             data.Sender === Player.MemberNumber &&
             data.Content.includes("Orgasm") &&
@@ -97,6 +97,7 @@
 
             ServerSend("ChatRoomChat", { Content: randomMessage, Type: "Chat", Dictionary: { Tag: 'fbc_nonce', Text: randomMessage } });
         }
+        }
         // 新的喵叭数组
         // 在触摸反馈函数中添加对喵叭的调用
         if (accessoryDescription === "黑猫耳" || accessoryDescription === "浅色猫耳") {
@@ -106,7 +107,7 @@
             触摸反馈(data, "Suction", 喵叭3);
             触摸反馈(data, "VibeMode", 喵叭4);
             触摸反馈(data, "Tickle", 喵叭5);
-        }
+        
         if (
             data.Sender === Player.MemberNumber &&
             data.Content.includes("Orgasm") &&
@@ -117,7 +118,7 @@
 
             ServerSend("ChatRoomChat", { Content: randomMessage, Type: "Chat", Dictionary: { Tag: 'fbc_nonce', Text: randomMessage } });
         }
-
+        }
         next(args)
     });
 
@@ -184,7 +185,7 @@
             case "软狗耳":
             case "小狗耳朵":
             case "狼耳 大":
-            case "狼耳一件套":
+            case "狼耳一件套":muq
                 catTagObject = 'Luzi_狗狗';
                 break;
             case "精灵耳朵":
