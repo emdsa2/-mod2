@@ -154,11 +154,11 @@
             let originalContent = data.Content;
 
             if (accessoryDescription === "黑猫耳" || accessoryDescription === "浅色猫耳") {
-                processContent(data, originalContent, 'Luzi_猫猫', '喵');
+                processContent(data, originalContent, 'Luzi_猫猫', '喵'); // 喵喵喵
             } else if (accessoryDescription === "软狗耳" || accessoryDescription === "小狗耳朵") {
-                processContent(data, originalContent, 'Luzi_狗狗', '汪');
+                processContent(data, originalContent, 'Luzi_狗狗', '汪'); // 汪汪汪
             } else if (accessoryDescription === "精灵耳朵") {
-                processContent(data, originalContent, 'Luzi_精灵', '阿巴');
+                processContent(data, originalContent, 'Luzi_精灵', '阿巴'); // 高贵的精灵语
             } else {
                 data.Dictionary = data.Dictionary || [];
                 data.Dictionary.push({ Tag: 'Luzi_正常', Text: originalContent });
