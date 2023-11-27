@@ -154,11 +154,11 @@
             let originalContent = data.Content;
 
             if (accessoryDescription === "黑猫耳" || accessoryDescription === "浅色猫耳") {
-                processContent(data, originalContent, 'Luzi_猫猫', '喵'); // 喵喵喵
+                processContent(data, originalContent, 'Luzi_猫猫', '喵');
             } else if (accessoryDescription === "软狗耳" || accessoryDescription === "小狗耳朵") {
-                processContent(data, originalContent, 'Luzi_狗狗', '汪'); // 汪汪汪
+                processContent(data, originalContent, 'Luzi_狗狗', '汪');
             } else if (accessoryDescription === "精灵耳朵") {
-                processContent(data, originalContent, 'Luzi_精灵', '阿巴'); // 高贵的精灵语
+                processContent(data, originalContent, 'Luzi_精灵', '阿巴');
             } else {
                 data.Dictionary = data.Dictionary || [];
                 data.Dictionary.push({ Tag: 'Luzi_正常', Text: originalContent });
@@ -172,10 +172,13 @@
     mod.hookFunction("ChatRoomMessage", 0, (args, next) => {
         const data = args[0];
         let accessory = InventoryGet(Player, "HairAccessory2");
+        let luzi = InventoryGet(Player, "ItemEars");
         let accessoryDescription = accessory?.Asset?.Description;
+        let luziaccessoryDescription = luzi?.Asset?.Description;
         let catTagObject;
 
         switch (accessoryDescription) {
+            case "黑猫耳":
             case "黑猫耳":
             case "浅色猫耳":
             case "狐耳 大":
@@ -192,6 +195,17 @@
                 catTagObject = 'Luzi_精灵';
                 break;
         }
+        switch (luziaccessoryDescription) {
+            case "未来耳机":
+                catTagObject = 'Luzi_猫猫';
+                break;
+            case "未来耳机":
+                catTagObject = 'Luzi_狗狗';
+                break;
+            case "未来耳机":
+                catTagObject = 'Luzi_精灵';
+                break;
+        }
 
         if (catTagObject && data.Dictionary && typeof data.Dictionary === 'object') {
             let catTagObjectKey = Object.keys(data.Dictionary).find(key => data.Dictionary[key].Tag === catTagObject);
@@ -199,6 +213,9 @@
                 data.Content = data.Dictionary[catTagObjectKey].Text;
             }
         }
+
+
+
 
         next(args);
     });
@@ -218,9 +235,5 @@
 // var 高潮 = "Orgasm"
 
 // 尝试做 检测玩家 尾巴 或者 耳朵 来 执行动物的叫声
-
-
-
-
 
 
