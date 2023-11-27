@@ -177,8 +177,8 @@
         let luziaccessoryDescription = luzi?.Asset?.Description;
         let catTagObject;
 
+        // 使用 accessoryDescription 匹配 catTagObject
         switch (accessoryDescription) {
-            case "黑猫耳":
             case "黑猫耳":
             case "浅色猫耳":
             case "狐耳 大":
@@ -195,16 +195,21 @@
                 catTagObject = 'Luzi_精灵';
                 break;
         }
-        switch (luziaccessoryDescription) {
-            case "未来耳机":
-                catTagObject = 'Luzi_猫猫';
-                break;
-            case "未来耳机":
-                catTagObject = 'Luzi_狗狗';
-                break;
-            case "未来耳机":
-                catTagObject = 'Luzi_精灵';
-                break;
+
+        // 如果 accessoryDescription 没有匹配，则使用 luziaccessoryDescription 进行匹配
+        if (!catTagObject) {
+            switch (luziaccessoryDescription) {
+                case "未来耳机":
+                    catTagObject = 'Luzi_猫猫';
+                    break;
+                // 你似乎使用了相同的条件三次，这可能是错误。请根据需要调整。
+                case "未来耳机":
+                    catTagObject = 'Luzi_狗狗';
+                    break;
+                case "未来耳机":
+                    catTagObject = 'Luzi_精灵';
+                    break;
+            }
         }
 
         if (catTagObject && data.Dictionary && typeof data.Dictionary === 'object') {
@@ -214,11 +219,9 @@
             }
         }
 
-
-
-
         next(args);
     });
+
     // ==========================================================
     // ==========================================================
 
