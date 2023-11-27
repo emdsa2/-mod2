@@ -185,7 +185,7 @@
             case "软狗耳":
             case "小狗耳朵":
             case "狼耳 大":
-            case "狼耳一件套":muq
+            case "狼耳一件套":
                 catTagObject = 'Luzi_狗狗';
                 break;
             case "精灵耳朵":
