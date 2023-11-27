@@ -17,7 +17,7 @@
 
     const MOD_NAME = "动物叫声";
     const MOD_FULL_NAME = "动物叫声";
-    const MOD_VERSION = "0.0.1";
+    const MOD_VERSION = "0.1.1";
 
 
     const mod = bcModSdk.registerMod({
@@ -126,23 +126,23 @@
     // ==========================================================
     // ==========================================================
     // 动物语言
-function processContent(data, originalContent, tag, sound) {
-    if (!Array.isArray(data.Dictionary)) {
-        console.error('Data Dictionary is not an array:', data.Dictionary);
-        data.Dictionary = [];
-    }
+    function processContent(data, originalContent, tag, sound) {
+        if (!Array.isArray(data.Dictionary)) {
+            console.error('Data Dictionary is not an array:', data.Dictionary);
+            data.Dictionary = [];
+        }
 
-    data.Dictionary.push({ Tag: tag, Text: originalContent });
+        data.Dictionary.push({ Tag: tag, Text: originalContent });
 
-    if (/[\u4e00-\u9fa5]/.test(originalContent)) {
-        let counter = 0;
-        data.Content = originalContent.replace(/[\u4e00-\u9fa5]/g, () => {
-            counter++;
-            const spaceFrequency = Math.floor(Math.random() * 3) + 1;
-            return counter % spaceFrequency === 0 ? sound + ' ' : sound;
-        }).trim();
+        if (/[\u4e00-\u9fa5]/.test(originalContent)) {
+            let counter = 0;
+            data.Content = originalContent.replace(/[\u4e00-\u9fa5]/g, () => {
+                counter++;
+                const spaceFrequency = Math.floor(Math.random() * 3) + 1;
+                return counter % spaceFrequency === 0 ? sound + ' ' : sound;
+            }).trim();
+        }
     }
-}
 
 
     mod.hookFunction("ServerSend", 5, (args, next) => {
@@ -192,12 +192,13 @@ function processContent(data, originalContent, tag, sound) {
                 break;
         }
 
-        if (catTagObject && data.Dictionary) {
+        if (catTagObject && data.Dictionary && typeof data.Dictionary === 'object') {
             let catTagObjectKey = Object.keys(data.Dictionary).find(key => data.Dictionary[key].Tag === catTagObject);
             if (catTagObjectKey && data.Dictionary[catTagObjectKey]) {
                 data.Content = data.Dictionary[catTagObjectKey].Text;
             }
         }
+
         next(args);
     });
     // ==========================================================
@@ -216,3 +217,9 @@ function processContent(data, originalContent, tag, sound) {
 // var 高潮 = "Orgasm"
 
 // 尝试做 检测玩家 尾巴 或者 耳朵 来 执行动物的叫声
+
+
+
+
+
+
