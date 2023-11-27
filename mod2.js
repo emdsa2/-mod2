@@ -126,23 +126,23 @@
     // ==========================================================
     // ==========================================================
     // 动物语言
-    function processContent(data, originalContent, tag, sound) {
-        if (!Array.isArray(data.Dictionary)) {
-            console.error('Data Dictionary is not an array:', data.Dictionary);
-            data.Dictionary = [];
-        }
-
-        data.Dictionary.push({ Tag: tag, Text: originalContent });
-
-        if (/[\u4e00-\u9fa5]/.test(originalContent)) {
-            let counter = 0;
-            data.Content = originalContent.replace(/[\u4e00-\u9fa5]/g, () => {
-                counter++;
-                const spaceFrequency = Math.floor(Math.random() * 3) + 1;
-                return counter % spaceFrequency === 0 ? sound + ' ' : sound;
-            }).trim();
-        }
+function processContent(data, originalContent, tag, sound) {
+    if (!Array.isArray(data.Dictionary)) {
+        console.error('Data Dictionary is not an array:', data.Dictionary);
+        data.Dictionary = [];
     }
+
+    data.Dictionary.push({ Tag: tag, Text: originalContent });
+
+    if (/[\u4e00-\u9fa5]/.test(originalContent)) {
+        let counter = 0;
+        data.Content = originalContent.replace(/[\u4e00-\u9fa5]/g, () => {
+            counter++;
+            const spaceFrequency = Math.floor(Math.random() * 3) + 1;
+            return counter % spaceFrequency === 0 ? sound + ' ' : sound;
+        }).trim();
+    }
+}
 
 
     mod.hookFunction("ServerSend", 5, (args, next) => {
@@ -192,7 +192,7 @@
                 break;
         }
 
-        if (catTagObject) {
+        if (catTagObject && data.Dictionary) {
             let catTagObjectKey = Object.keys(data.Dictionary).find(key => data.Dictionary[key].Tag === catTagObject);
             if (catTagObjectKey && data.Dictionary[catTagObjectKey]) {
                 data.Content = data.Dictionary[catTagObjectKey].Text;
