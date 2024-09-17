@@ -1,3 +1,4 @@
+
 // ==UserScript==
 // @name         BC 自定义动作
 // @namespace    https://www.bondageprojects.com/
@@ -46,6 +47,26 @@
                     Text: msg
                 });
             }
+        }
+        let data = args[1];
+        let actName = data.Dictionary[3]?.ActivityName ?? "";
+        if (actName.indexOf("笨蛋Luzi_") == 0) {
+            let { metadata, substitutions } = ChatRoomMessageRunExtractors(data, Player)
+            let msg = ActivityDictionaryText(data.Content);
+            msg = CommonStringSubstitute(msg, substitutions ?? [])
+            data.Dictionary.push({
+                Tag: "MISSING ACTIVITY DESCRIPTION FOR KEYWORD " + data.Content,
+                Text: msg
+            });
+        }
+        if (actName.indexOf("笨蛋笨Luzi_") == 0) {
+            let { metadata, substitutions } = ChatRoomMessageRunExtractors(data, Player)
+            let msg = ActivityDictionaryText(data.Content);
+            msg = CommonStringSubstitute(msg, substitutions ?? [])
+            data.Dictionary.push({
+                Tag: "MISSING ACTIVITY DESCRIPTION FOR KEYWORD " + data.Content,
+                Text: msg
+            });
         }
         next(args);
     });
@@ -147,62 +168,62 @@
             assetgroup: "", imageName: "PoliteKiss",
             modPosture: true, modifyOwnPosture: false, postureName: "AllFours"
         },
-        {
-            name: "剪刀剪掉上衣", prerequisite: ["UseHands", "UseArms", "HasSword"],
-            targetSelf: "ItemTorso", targetSelftext: "SourceCharacter用剪刀剪掉了自己的上衣.", maxProgressSelf: 50,
-            target: "ItemTorso", targettext: "SourceCharacter用剪刀剪掉了TargetCharacter的上衣.", maxProgress: 50,
-            activityExpression: [],
-            assetgroup: "ItemHandheld", imageName: "Scissors",
-            modPosture: false, modifyOwnPosture: false, postureName: ""
-        },
-        {
-            name: "剪刀剪掉下衣", prerequisite: ["UseHands", "UseArms", "HasSword"],
-            targetSelf: "ItemPelvis", targetSelftext: "SourceCharacter用剪刀剪掉了自己的下衣.", maxProgressSelf: 50,
-            target: "ItemPelvis", targettext: "SourceCharacter用剪刀剪掉了TargetCharacter的下衣.", maxProgress: 50,
-            activityExpression: [],
-            assetgroup: "ItemHandheld", imageName: "Scissors",
-            modPosture: false, modifyOwnPosture: false, postureName: ""
-        },
-        {
-            name: "剪刀剪掉胸罩", prerequisite: ["UseHands", "UseArms", "HasSword"],
-            targetSelf: "ItemBreast", targetSelftext: "SourceCharacter用剪刀剪掉了自己的胸罩.", maxProgressSelf: 50,
-            target: "ItemBreast", targettext: "SourceCharacter用剪刀剪掉了TargetCharacter的胸罩.", maxProgress: 50,
-            activityExpression: [],
-            assetgroup: "ItemHandheld", imageName: "Scissors",
-            modPosture: false, modifyOwnPosture: false, postureName: ""
-        },
-        {
-            name: "剪刀剪掉内裤", prerequisite: ["UseHands", "UseArms", "HasSword"],
-            targetSelf: "ItemVulvaPiercings", targetSelftext: "SourceCharacter用剪刀剪掉了自己的内裤.", maxProgressSelf: 50,
-            target: "ItemVulvaPiercings", targettext: "SourceCharacter用剪刀剪掉了TargetCharacter的内裤.", maxProgress: 50,
-            activityExpression: [],
-            assetgroup: "ItemHandheld", imageName: "Scissors",
-            modPosture: false, modifyOwnPosture: false, postureName: ""
-        },
-        {
-            name: "剪刀剪掉袜子", prerequisite: ["UseHands", "UseArms", "HasSword"],
-            targetSelf: "ItemBoots", targetSelftext: "SourceCharacter用剪刀剪掉了自己的袜子.", maxProgressSelf: 50,
-            target: "ItemBoots", targettext: "SourceCharacter用剪刀剪掉了TargetCharacter的袜子.", maxProgress: 50,
-            activityExpression: [],
-            assetgroup: "ItemHandheld", imageName: "Scissors",
-            modPosture: false, modifyOwnPosture: false, postureName: ""
-        },
-        {
-            name: "舔触手", prerequisite: ["HasTentacles"],
-            targetSelf: "ItemMouth", targetSelftext: "SourceCharacter舔PronounPossessive的触手.", maxProgressSelf: 50,
-            target: "", targettext: "", maxProgress: 50,
-            activityExpression: [],
-            assetgroup: "TailStraps", imageName: "Tentacles",
-            modPosture: false, modifyOwnPosture: false, postureName: ""
-        },
-        {
-            name: "触手戳鼻子", prerequisite: ["HasTentacles2"],
-            targetSelf: "ItemNose", targetSelftext: "SourceCharacter用触手戳了戳自己的鼻子.", maxProgressSelf: 50,
-            target: "ItemNose", targettext: "SourceCharacter用触手戳了戳TargetCharacter的鼻子.", maxProgress: 50,
-            activityExpression: [],
-            assetgroup: "TailStraps", imageName: "Tentacles",
-            modPosture: false, modifyOwnPosture: false, postureName: ""
-        },
+        // {
+        //     name: "剪刀剪掉上衣", prerequisite: ["UseHands", "UseArms", "HasSword"],
+        //     targetSelf: "ItemTorso", targetSelftext: "SourceCharacter用剪刀剪掉了自己的上衣.", maxProgressSelf: 50,
+        //     target: "ItemTorso", targettext: "SourceCharacter用剪刀剪掉了TargetCharacter的上衣.", maxProgress: 50,
+        //     activityExpression: [],
+        //     assetgroup: "ItemHandheld", imageName: "Scissors",
+        //     modPosture: false, modifyOwnPosture: false, postureName: ""
+        // },
+        // {
+        //     name: "剪刀剪掉下衣", prerequisite: ["UseHands", "UseArms", "HasSword"],
+        //     targetSelf: "ItemPelvis", targetSelftext: "SourceCharacter用剪刀剪掉了自己的下衣.", maxProgressSelf: 50,
+        //     target: "ItemPelvis", targettext: "SourceCharacter用剪刀剪掉了TargetCharacter的下衣.", maxProgress: 50,
+        //     activityExpression: [],
+        //     assetgroup: "ItemHandheld", imageName: "Scissors",
+        //     modPosture: false, modifyOwnPosture: false, postureName: ""
+        // },
+        // {
+        //     name: "剪刀剪掉胸罩", prerequisite: ["UseHands", "UseArms", "HasSword"],
+        //     targetSelf: "ItemBreast", targetSelftext: "SourceCharacter用剪刀剪掉了自己的胸罩.", maxProgressSelf: 50,
+        //     target: "ItemBreast", targettext: "SourceCharacter用剪刀剪掉了TargetCharacter的胸罩.", maxProgress: 50,
+        //     activityExpression: [],
+        //     assetgroup: "ItemHandheld", imageName: "Scissors",
+        //     modPosture: false, modifyOwnPosture: false, postureName: ""
+        // },
+        // {
+        //     name: "剪刀剪掉内裤", prerequisite: ["UseHands", "UseArms", "HasSword"],
+        //     targetSelf: "ItemVulvaPiercings", targetSelftext: "SourceCharacter用剪刀剪掉了自己的内裤.", maxProgressSelf: 50,
+        //     target: "ItemVulvaPiercings", targettext: "SourceCharacter用剪刀剪掉了TargetCharacter的内裤.", maxProgress: 50,
+        //     activityExpression: [],
+        //     assetgroup: "ItemHandheld", imageName: "Scissors",
+        //     modPosture: false, modifyOwnPosture: false, postureName: ""
+        // },
+        // {
+        //     name: "剪刀剪掉袜子", prerequisite: ["UseHands", "UseArms", "HasSword"],
+        //     targetSelf: "ItemBoots", targetSelftext: "SourceCharacter用剪刀剪掉了自己的袜子.", maxProgressSelf: 50,
+        //     target: "ItemBoots", targettext: "SourceCharacter用剪刀剪掉了TargetCharacter的袜子.", maxProgress: 50,
+        //     activityExpression: [],
+        //     assetgroup: "ItemHandheld", imageName: "Scissors",
+        //     modPosture: false, modifyOwnPosture: false, postureName: ""
+        // },
+        // {
+        //     name: "舔触手", prerequisite: ["HasTentacles"],
+        //     targetSelf: "ItemMouth", targetSelftext: "SourceCharacter舔PronounPossessive的触手.", maxProgressSelf: 50,
+        //     target: "", targettext: "", maxProgress: 50,
+        //     activityExpression: [],
+        //     assetgroup: "TailStraps", imageName: "Tentacles",
+        //     modPosture: false, modifyOwnPosture: false, postureName: ""
+        // },
+        // {
+        //     name: "触手戳鼻子", prerequisite: ["HasTentacles2"],
+        //     targetSelf: "ItemNose", targetSelftext: "SourceCharacter用触手戳了戳自己的鼻子.", maxProgressSelf: 50,
+        //     target: "ItemNose", targettext: "SourceCharacter用触手戳了戳TargetCharacter的鼻子.", maxProgress: 50,
+        //     activityExpression: [],
+        //     assetgroup: "TailStraps", imageName: "Tentacles",
+        //     modPosture: false, modifyOwnPosture: false, postureName: ""
+        // },
 
 
 
@@ -276,12 +297,12 @@
         next(args);
     });
 
-    let is笨蛋炉子 = false;
+    let is_笨蛋炉子 = false;
     笨蛋Luzi.hookFunction("LoginResponse", 10, (args, next) => {
         next(args)
-        if (!is笨蛋炉子) {
+        if (!is_笨蛋炉子) {
             w.newActivities = activitiesInfo.map(activityInfo => createActivity(activityInfo));
-            is笨蛋炉子 = true;
+            is_笨蛋炉子 = true;
         }
     })
 
@@ -362,8 +383,32 @@
     //============================================================
     //============================================================
 
+    let is笨蛋炉子 = false;
+    笨蛋Luzi.hookFunction("LoginResponse", 10, (args, next) => {
+        next(args)
+        if (!is笨蛋炉子) {
+            var Nibble = { Name: "Nibble", MaxProgress: 40, Prerequisite: ["ZoneAccessible", "UseMouth", "ZoneNaked"], Target: ["ItemArms", "ItemBoots", "ItemEars", "ItemFeet", "ItemHands", "ItemLegs", "ItemMouth", "ItemNeck", "ItemNipples", "ItemNose", "ItemPelvis", "ItemTorso", "ItemTorso2", "ItemVulva", "ItemVulvaPiercings",], TargetSelf: ["ItemArms", "ItemBoots", "ItemHands", "ItemMouth", "ItemNipples",], };
+            ActivityFemale3DCG.push(Nibble);
+            // ActivityFemale3DCG.push(Nibble.Name);
 
+            w.newActivities = activitiesInfo.map(activityInfo => createActivity(activityInfo));
+            if (Player.OnlineSettings.ECHO && Player.OnlineSettings.ECHO.炉子ActivityFemale3DCG) {
+                // 解压炉子ActivityFemale3DCG
+                var decompressedActivityFemale3DCG = JSON.parse(LZString.decompressFromUTF16(Player.OnlineSettings.ECHO.炉子ActivityFemale3DCG));
+                ActivityFemale3DCG.push(...decompressedActivityFemale3DCG); // 将解压缩后的数据添加到ActivityFemale3DCG数组中
+            }
+            if (Player.OnlineSettings.ECHO && Player.OnlineSettings.ECHO.炉子ActivityFemale3DCGOrdering) {
+                // 解压炉子ActivityFemale3DCGOrdering
+                var decompressedActivityFemale3DCGOrdering = JSON.parse(LZString.decompressFromUTF16(Player.OnlineSettings.ECHO.炉子ActivityFemale3DCGOrdering));
+                ActivityFemale3DCGOrdering.push(...decompressedActivityFemale3DCGOrdering); // 将解压缩后的数据添加到ActivityFemale3DCGOrdering数组中
+            }
+            if (Player.OnlineSettings.ECHO && Player.OnlineSettings.ECHO.炉子ActivityDictionary) {
+                // 解压炉子ActivityDictionary
+                var decompressedActivityDictionary = JSON.parse(LZString.decompressFromUTF16(Player.OnlineSettings.ECHO.炉子ActivityDictionary));
+                ActivityDictionary.push(...decompressedActivityDictionary); // 将解压缩后的数据添加到ActivityDictionary数组中
+            }
+            is笨蛋炉子 = true;
+        }
+    })
 
 })();
-
-
