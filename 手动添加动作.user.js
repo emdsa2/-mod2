@@ -47,26 +47,24 @@
                     Text: msg
                 });
             }
-        }
-        let data = args[1];
-        let actName = data.Dictionary[3]?.ActivityName ?? "";
-        if (actName.indexOf("笨蛋Luzi_") == 0) {
-            let { metadata, substitutions } = ChatRoomMessageRunExtractors(data, Player)
-            let msg = ActivityDictionaryText(data.Content);
-            msg = CommonStringSubstitute(msg, substitutions ?? [])
-            data.Dictionary.push({
-                Tag: "MISSING ACTIVITY DESCRIPTION FOR KEYWORD " + data.Content,
-                Text: msg
-            });
-        }
-        if (actName.indexOf("笨蛋笨Luzi_") == 0) {
-            let { metadata, substitutions } = ChatRoomMessageRunExtractors(data, Player)
-            let msg = ActivityDictionaryText(data.Content);
-            msg = CommonStringSubstitute(msg, substitutions ?? [])
-            data.Dictionary.push({
-                Tag: "MISSING ACTIVITY DESCRIPTION FOR KEYWORD " + data.Content,
-                Text: msg
-            });
+            if (actName.indexOf("笨蛋Luzi_") == 0) {
+                let { metadata, substitutions } = ChatRoomMessageRunExtractors(data, Player)
+                let msg = ActivityDictionaryText(data.Content);
+                msg = CommonStringSubstitute(msg, substitutions ?? [])
+                data.Dictionary.push({
+                    Tag: "MISSING ACTIVITY DESCRIPTION FOR KEYWORD " + data.Content,
+                    Text: msg
+                });
+            }
+            if (actName.indexOf("笨蛋笨Luzi_") == 0) {
+                let { metadata, substitutions } = ChatRoomMessageRunExtractors(data, Player)
+                let msg = ActivityDictionaryText(data.Content);
+                msg = CommonStringSubstitute(msg, substitutions ?? [])
+                data.Dictionary.push({
+                    Tag: "MISSING ACTIVITY DESCRIPTION FOR KEYWORD " + data.Content,
+                    Text: msg
+                });
+            }
         }
         next(args);
     });
