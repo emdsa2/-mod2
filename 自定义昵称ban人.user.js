@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         BC 自定义封禁
+// @name         BC 自动封禁
 // @namespace    https://www.bondageprojects.com/
 // @version      0.3.0
 // @description  代码测试
@@ -48,14 +48,13 @@
         function getMemberNumbersFromChatRoomCharacter() {
             for (let i = 0; i < ChatRoomCharacter.length; i++) {
                 const character = ChatRoomCharacter[i];
-                if (character.Nickname.includes('随意丢弃m的鸢')) {
+                if (character && character.Nickname && character.Nickname.includes('随意丢弃m的鸢')) {
                     banPlayer(character.MemberNumber);
                     break; // 找到并处理后退出循环
                 }
             }
         }
         getMemberNumbersFromChatRoomCharacter();
-
         return next(args);
     });
 
@@ -63,3 +62,4 @@
     // ========================================================================
 
 })();
+
