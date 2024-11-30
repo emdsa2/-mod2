@@ -55,11 +55,24 @@
             }
         }
         getMemberNumbersFromChatRoomCharacter();
+        /* 排列出房间内的玩家ID 并检测特定昵称的玩家 */
+        function getMemberNumbersFromChatRoomCharacter2() {
+            for (let i = 0; i < ChatRoomCharacter.length; i++) {
+                const character = ChatRoomCharacter[i];
+                if (character && character.Name && character.Name.includes('joker')) {
+                    banPlayer(character.MemberNumber);
+                    break; // 找到并处理后退出循环
+                }
+            }
+        }
+        getMemberNumbersFromChatRoomCharacter2();
+
         return next(args);
     });
 
+
+    
     // ========================================================================
     // ========================================================================
 
 })();
-
