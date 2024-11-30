@@ -48,7 +48,7 @@
         function getMemberNumbersFromChatRoomCharacter() {
             for (let i = 0; i < ChatRoomCharacter.length; i++) {
                 const character = ChatRoomCharacter[i];
-                if (character.Nickname === '一个喜欢冷暴力并且随意丢弃m的鸢7982') {
+                if (character.Nickname === '一个喜欢冷暴力并且随意丢弃m的鸢79820') {
                     banPlayer(character.MemberNumber);
                     break; // 找到并处理后退出循环
                 }
