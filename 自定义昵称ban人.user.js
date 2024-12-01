@@ -1,3 +1,4 @@
+
 // ==UserScript==
 // @name         BC 自动封禁
 // @namespace    https://www.bondageprojects.com/
@@ -44,34 +45,39 @@
             }
         }
 
-        /* 排列出房间内的玩家ID 并检测特定昵称的玩家 */
-        function getMemberNumbersFromChatRoomCharacter() {
+        /* 通用函数：排列出房间内的玩家ID 并检测特定字符串的玩家 */
+        function banPlayerByString(searchString) {
             for (let i = 0; i < ChatRoomCharacter.length; i++) {
                 const character = ChatRoomCharacter[i];
-                if (character && character.Nickname && character.Nickname.includes('随意丢弃m的鸢')) {
-                    banPlayer(character.MemberNumber);
-                    break; // 找到并处理后退出循环
+                if (character) {
+                    if (character.Nickname && character.Nickname.includes(searchString)) {
+                        banPlayer(character.MemberNumber);
+                        break; // 找到并处理后退出循环
+                    }
+                    if (character.Name && character.Name.includes(searchString)) {
+                        banPlayer(character.MemberNumber);
+                        break; // 找到并处理后退出循环
+                    }
                 }
             }
         }
-        getMemberNumbersFromChatRoomCharacter();
-        /* 排列出房间内的玩家ID 并检测特定昵称的玩家 */
-        function getMemberNumbersFromChatRoomCharacter2() {
-            for (let i = 0; i < ChatRoomCharacter.length; i++) {
-                const character = ChatRoomCharacter[i];
-                if (character && character.Name && character.Name.includes('joker')) {
-                    banPlayer(character.MemberNumber);
-                    break; // 找到并处理后退出循环
-                }
-            }
-        }
-        getMemberNumbersFromChatRoomCharacter2();
+
+        // 调用通用函数检测含有特定字符的玩家
+        banPlayerByString('随意丢弃m的鸢');
+        banPlayerByString('joker');
+        banPlayerByString('死人鸢');
+        banPlayerByString('79820');
+
+        // 如果需要添加更多的检测条件，只需调用 banPlayerByString 并传入不同的字符串即可
+        // 例如：
+        // banPlayerByString('anotherNickname');
+        // banPlayerByString('anotherName');
 
         return next(args);
     });
 
 
-    
+
     // ========================================================================
     // ========================================================================
 
